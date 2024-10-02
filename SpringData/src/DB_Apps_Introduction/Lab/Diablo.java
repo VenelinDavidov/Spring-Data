@@ -2,20 +2,28 @@ package DB_Apps_Introduction.Lab;
 
 import java.sql.*;
 import java.util.Objects;
+import java.util.Properties;
 import java.util.Scanner;
 
 public class Diablo {
 
     private static final String URL = "jdbc:mysql://localhost:3306/diablo";
+    private static final String password = "Root";
+    private static final String user = "root";
+    private static final Properties properties = new Properties();
+    private static final Scanner scanner = new Scanner(System.in);
 
     public static void main(String[] args) throws SQLException {
 
         // connect to db
+
+        properties.setProperty("user",user);
+        properties.setProperty("password",password);
         Connection connection =
-                DriverManager.getConnection(URL, "root", "Root");
+                DriverManager.getConnection(URL, properties);
 
         // Execute  query
-        Scanner scanner = new Scanner(System.in);
+
         System.out.println("Enter Username: ");
         String username = scanner.nextLine();
 
