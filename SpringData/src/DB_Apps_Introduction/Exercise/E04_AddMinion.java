@@ -38,29 +38,25 @@ public class E04_AddMinion {
             System.out.printf("Town %s was added to the database.%n", townName);
         }
 
-        // Create Minions and Find Villain, if he not exist -> create Villain
+        // Create Minions and Find Villain, if he not exists -> create Villain
         int minionId = createMinion(minionsName, ageMinions, townId);
-        int villainID = findVillainByName(villainName);
-        if (villainID == 0) {
-            villainID = createVillain(villainName);
+        int villainId = findVillainByName(villainName);
+        if (villainId == 0) {
+            villainId = createVillain(villainName);
             System.out.printf("Villain %s was added to the database.%n", villainName);
         }
 
-        populateMinionsVillains(minionId, villainID);
+        populateMinionsVillains(minionId, villainId);
         System.out.printf("Successfully added %s to be minion of %s", minionsName, villainName);
 
     }
 
 
-
-
-
-
-     // METHODS
-    private static void populateMinionsVillains(int minionId, int villainID) throws SQLException {
-        PreparedStatement preparedStatement = DB_TOOLS.getConnection().prepareStatement("INSERT INTO minions_villains VALUE (?,?)");
-        preparedStatement.setInt(1,minionId);
-        preparedStatement.setInt(2  ,villainID);
+    // METHODS
+    private static void populateMinionsVillains(int minionId, int villainId) throws SQLException {
+        PreparedStatement preparedStatement = DB_TOOLS.getConnection().prepareStatement("INSERT INTO minions_villains VALUE (?, ?)");
+        preparedStatement.setInt(1, minionId);
+        preparedStatement.setInt(2, villainId);
         preparedStatement.executeUpdate();
 
 
@@ -71,7 +67,7 @@ public class E04_AddMinion {
         preparedStatement.setString(1, villainName);
         preparedStatement.executeUpdate();
 
-        preparedStatement = DB_TOOLS.getConnection().prepareStatement("SELECT id FROM villains WHERE name =? ");
+        preparedStatement = DB_TOOLS.getConnection().prepareStatement("SELECT id FROM villains WHERE name = ? ");
         preparedStatement.setString(1, villainName);
         ResultSet resultSet = preparedStatement.executeQuery();
 
@@ -81,8 +77,8 @@ public class E04_AddMinion {
     }
 
     private static int findVillainByName(String villainName) throws SQLException {
-        PreparedStatement preparedStatement = DB_TOOLS.getConnection().prepareStatement("SELECT id FROM minions WHERE name = ?");
-       preparedStatement.setString(1,villainName);
+        PreparedStatement preparedStatement = DB_TOOLS.getConnection().prepareStatement("SELECT id FROM villains WHERE name = ?");
+        preparedStatement.setString(1, villainName);
         ResultSet resultSet = preparedStatement.executeQuery();
         if (resultSet.next()) {
             return resultSet.getInt("id");
