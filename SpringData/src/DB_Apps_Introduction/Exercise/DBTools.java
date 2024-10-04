@@ -9,9 +9,10 @@ public class DBTools {
 
     private final String url = "jdbc:mysql://localhost:3306/";
 
+    // field
     private Connection connection;
 
-
+   //constructor
     public DBTools(String username, String password, String tableName) {
         Properties properties = new Properties();
         properties.setProperty("user", username);

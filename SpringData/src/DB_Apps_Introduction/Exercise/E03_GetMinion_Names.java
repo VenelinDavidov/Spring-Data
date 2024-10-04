@@ -17,7 +17,6 @@ public class E03_GetMinion_Names {
 
         Exercise3();
 
-
     }
 
     private static void Exercise3() throws IOException, SQLException {

@@ -21,19 +21,24 @@ public class E04_AddMinion {
 
     private static void Exercise4() throws IOException, SQLException {
 
+        //Minion: Robert 14 Berlin -> Вход
         String[] minionsToken = READER.readLine().split("\\s+");
         String minionsName = minionsToken[1];
         int ageMinions = Integer.parseInt(minionsToken[2]);
         String townName = minionsToken[3];
 
+        //Villain: Gru -> Вход
         String villainName = READER.readLine().split("\\s+")[1];
 
+
+        // Search Town, if it not exist -> create
         int townId = findTownId(townName);
         if (townId == 0) {
             townId = createTown(townName);
             System.out.printf("Town %s was added to the database.%n", townName);
         }
 
+        // Create Minions and Find Villain, if he not exist -> create Villain
         int minionId = createMinion(minionsName, ageMinions, townId);
         int villainID = findVillainByName(villainName);
         if (villainID == 0) {
