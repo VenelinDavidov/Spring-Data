@@ -21,6 +21,7 @@ public class E06_RemoveVillain {
     // Methods
     private static void Exercise6() throws IOException, SQLException {
 
+        // Input
         int villainId = Integer.parseInt(READER.readLine()); // Input -> 1
 
         String villainName = findVillainById(villainId);   // Method
