@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Example</title>
+    <script>
+        // fetch data
+        // create table rows
+        // append table rows to table body
+
+        fetch("http://localhost:8080/products")
+            .then(response => response.json())
+            .then(data => buildTableData(data));
+
+        function buildTableData(data) {
+            const tableData = document.getElementById("table-data");
+
+            for (let i = 0; i < data.length; i++) {
+                const row = document.createElement("tr");
+
+                const number = document.createElement("td");
+                number.innerHTML = (i + 1);
+                const name = document.createElement("td");
+                name.innerHTML = data[i].name;
+                const price = document.createElement("td");
+                price.innerHTML = data[i].price;
+                const description = document.createElement("td");
+                description.innerHTML = data[i].description;
+
+                row.appendChild(number);
+                row.appendChild(name);
+                row.appendChild(price);
+                row.appendChild(description);
+
+                tableData.appendChild(row);
+            }
+        }
+    </script>
+</head>
+<body>
+    <h1>Hello world</h1>
+    <table>
+        <thead>
+            <th>#</th>
+            <th>Name</th>
+            <th>Price</th>
+            <th>Description</th>
+        </thead>
+        <tbody id="table-data">
+
+        </tbody>
+    </table>
+</body>
+</html>
